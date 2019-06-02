@@ -22,6 +22,7 @@ class CreateUsuariosTable extends Migration
             $table->string('tipo_acesso', 3);
             $table->boolean('ativo', 1);
             $table->string('token', 255)->nullable();
+            $table->softDeletes();
             $table->timestamps();
             $table->timestamp('last_access')->nullable();
         });

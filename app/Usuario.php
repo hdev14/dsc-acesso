@@ -10,7 +10,15 @@ class Usuario extends Model
     //Exclusão lógica
     use SoftDeletes;
 
-    //protected $fillable = [];
+    protected $fillable = [
+        'login',
+        'senha',
+        'nome',
+        'cpf', 
+        'tipo_acesso',
+        'ativo',
+        //'token'
+    ];
 
     //Quando deletar, coluna preenchida com data e hora da exclusão.
     protected $dates = ['deleted_at'];

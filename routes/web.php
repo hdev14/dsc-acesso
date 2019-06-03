@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', 'UsuarioController@index');
+Route::view('/cadastro', 'usuario.cadastro');
+
+Route::post('/usuarios/autenticar', 'UsuarioController@autenticar');
+Route::post('/usuarios/criar', 'UsuarioController@criar');
+Route::match(['get','post'], '/usuarios/editar/{id?}', 'UsuarioController@editar');
+Route::post('/usuarios/excluir', 'UsuarioController@excluir');
+

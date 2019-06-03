@@ -4,20 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Usuario;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Hash;
 
-=======
->>>>>>> master
 
 class UsuarioController extends Controller
 {
 
-<<<<<<< HEAD
     public function index() {
-=======
-    public function index(){
->>>>>>> master
     	// Depois colocar uma ordenação.
     	$usuario = Usuario::all();
 
@@ -26,7 +19,6 @@ class UsuarioController extends Controller
     	]);
     }
 
-<<<<<<< HEAD
     public function autenticar(Request $req) {}
 
     public function criar(Request $req) {
@@ -54,15 +46,13 @@ class UsuarioController extends Controller
     public function editar(Request $req, $id = null) {
     	
     	if(is_null($id)) {
-=======
     public function autenticar(Request $req){}
 
     public function criar(Request $req){}
 
     public function editar(Request $req, $id = null){
     	
-    	if(is_null($id)){
->>>>>>> master
+    	if(is_null($id)) {
     		$usuario = Usuario::find($req->id);
     		$update = $usuario->update([
     			'login' => $req->login,
@@ -72,11 +62,7 @@ class UsuarioController extends Controller
     			'tipo_acesso' => $req->tipo_acesso
     		]);
 
-<<<<<<< HEAD
     		if($update) {
-=======
-    		if($update){
->>>>>>> master
     			// Se não editar...
     		}
 
@@ -89,7 +75,6 @@ class UsuarioController extends Controller
     	]);
     }
 
-<<<<<<< HEAD
     public function excluir($id) {
         $usuario = Usuario::find($id);
         if($usuario != null) {
@@ -99,7 +84,5 @@ class UsuarioController extends Controller
         return redirect('/index');
 
     }
-=======
-    public function excluir(){}
->>>>>>> master
+    public function excluir() {}
 }

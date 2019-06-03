@@ -11,6 +11,7 @@ class Usuario extends Model
     use SoftDeletes;
 
     protected $fillable = [
+<<<<<<< HEAD
         'login',
         'senha',
         'nome',
@@ -18,6 +19,13 @@ class Usuario extends Model
         'tipo_acesso',
         'ativo',
         //'token'
+=======
+    	'login',
+    	'senha',
+    	'nome',
+    	'cpf',
+    	'tipo_acesso',
+>>>>>>> master
     ];
 
     //Quando deletar, coluna preenchida com data e hora da exclusão.

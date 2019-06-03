@@ -42,10 +42,7 @@ class UsuarioController extends Controller
 
         return redirect('/index');
     }
-
-    public function editar(Request $req, $id = null) {
-    	
-    	if(is_null($id)) {
+    
     public function autenticar(Request $req){}
 
     public function criar(Request $req){}
@@ -84,5 +81,4 @@ class UsuarioController extends Controller
         return redirect('/index');
 
     }
-    public function excluir() {}
 }

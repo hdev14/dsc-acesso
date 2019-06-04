@@ -41,6 +41,6 @@
 		  	<input class="form-check-input" checked type="checkbox" name="usuarios[ativo]" value="true" id="ativo">
 		  	<label class="form-check-label" for="ativo">Ativo</label>
 		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary">Confirmar</button>
 	</form>
 </div>

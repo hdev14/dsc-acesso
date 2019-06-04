@@ -12,7 +12,7 @@ class UsuarioController extends Controller
 
     public function index() {
     	// Depois colocar uma ordenação.
-    	$usuario = Usuario::all();
+    	$usuarios = Usuario::all();
 
     	return view('usuario.index', [
     		'usuarios' => $usuarios,
@@ -27,7 +27,7 @@ class UsuarioController extends Controller
             'usuarios.login' => 'max:50|required|unique:usuarios,login',
             'usuarios.senha' => 'max:60|same:confirmSenha|required',
             'usuarios.nome' => 'max:200|required',
-            'usuarios.cpf' => 'max:11|text|required',
+            'usuarios.cpf' => 'max:11|string|required',
             'usuarios.tipo_acesso' => 'max:3|required',
             'usuarios.ativo' => 'required'
         ]);
@@ -43,9 +43,11 @@ class UsuarioController extends Controller
         return redirect('/index');
     }
 
+
     public function editar(Request $req, $id = null){
     	
     	if(is_null($id)) {
+            dd($req);
     		$usuario = Usuario::find($req->id);
     		$update = $usuario->update([
     			'login' => $req->login,

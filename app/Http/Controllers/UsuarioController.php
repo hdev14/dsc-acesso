@@ -42,10 +42,6 @@ class UsuarioController extends Controller
 
         return redirect('/index');
     }
-    
-    public function autenticar(Request $req){}
-
-    public function criar(Request $req){}
 
     public function editar(Request $req, $id = null){
     	

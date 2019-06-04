@@ -48,7 +48,7 @@ class UsuarioController extends Controller
     	
     	if(is_null($id)) {
             $dados = $req->usuarios;
-            
+
     		$usuario = Usuario::find($dados['id']);
     		$update = $usuario->update([
     			'login' => $dados['login'],
@@ -58,10 +58,13 @@ class UsuarioController extends Controller
     			'tipo_acesso' => $dados['tipo_acesso']
     		]);
 
-    		if($update) {
-    			// Se não editar...
-                dd($dados);
-    		}
+    		if ($update) {
+                $req->session()->flash('message-type','alert-success');
+                $req->session()->flash('message','Usuários modificado com sucesso!');
+    		} else {
+                $req->session()->flash('message-type','alert-danger');
+                $req->session()->flash('message','Não foi possível modificar o usuário. Por favor, tente novamente !');
+            }
 
     		return redirect('/index');
     	}

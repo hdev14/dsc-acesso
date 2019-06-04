@@ -4,7 +4,10 @@
 <div>
 	<form method="post" action="{{ action($action) }}">
 		@csrf
+
+		<!-- Se existe a variavel coloca o conteúdo dela na estrutura do form, caso não adicona nada. Esta variavel será usada para o editar o usuário. -->
 		{{ $id ?? '' }}
+
 		<div class="form-group">
 		    <label for="login">Login</label>
 		    <input type="text" class="form-control" id="login" placeholder="Digite um apelido para o seu login" name="usuarios[login]">

@@ -38,7 +38,7 @@ class UsuarioController extends Controller
 
         //Confirmação (Criar na visão)
         $req->session()->flash('message-type','alert-success');
-        $req->session()->flash('message','Usuários criado com sucesso!');
+        $req->session()->flash('message','Usuário criado com sucesso!');
 
         return redirect('/index');
     }
@@ -60,7 +60,7 @@ class UsuarioController extends Controller
 
     		if ($update) {
                 $req->session()->flash('message-type','alert-success');
-                $req->session()->flash('message','Usuários modificado com sucesso!');
+                $req->session()->flash('message','Usuário modificado com sucesso!');
     		} else {
                 $req->session()->flash('message-type','alert-danger');
                 $req->session()->flash('message','Não foi possível modificar o usuário. Por favor, tente novamente !');

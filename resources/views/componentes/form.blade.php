@@ -4,6 +4,7 @@
 <div>
 	<form method="post" action="{{ action($action) }}">
 		@csrf
+		{{ $id ?? '' }}
 		<div class="form-group">
 		    <label for="login">Login</label>
 		    <input type="text" class="form-control" id="login" placeholder="Digite um apelido para o seu login" name="usuarios[login]">

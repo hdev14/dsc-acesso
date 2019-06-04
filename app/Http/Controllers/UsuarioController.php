@@ -47,18 +47,20 @@ class UsuarioController extends Controller
     public function editar(Request $req, $id = null){
     	
     	if(is_null($id)) {
-            dd($req);
-    		$usuario = Usuario::find($req->id);
+            $dados = $req->usuarios;
+            
+    		$usuario = Usuario::find($dados['id']);
     		$update = $usuario->update([
-    			'login' => $req->login,
-    			'senha' => $req->senha,
-    			'nome' => $req->nome,
-    			'cpf' => $req->cpf,
-    			'tipo_acesso' => $req->tipo_acesso
+    			'login' => $dados['login'],
+    			'senha' => $dados['senha'],
+    			'nome' => $dados['nome'],
+    			'cpf' => $dados['cpf'],
+    			'tipo_acesso' => $dados['tipo_acesso']
     		]);
 
     		if($update) {
     			// Se não editar...
+                dd($dados);
     		}
 
     		return redirect('/index');

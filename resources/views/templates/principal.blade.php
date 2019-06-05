@@ -25,7 +25,6 @@
 		var elt_ativo = document.querySelector('#ativo');
 
 		if (elt_ativo) {
-			elt_ativo.setAttribute('value', '1');
 			elt_ativo.onclick = function () {
 				if(this.hasAttribute('checked')) {
 					this.removeAttribute('checked');

@@ -28,19 +28,20 @@
 			var attr_value = elt_ativo.getAttribute('value');
 			var checked = document.createAttribute('checked');
 
-			if(attr_value.textContent == '1')
-				elt_ativo.this.setAttributeNode(checked);
+			
+			if(attr_value === '1')
+				elt_ativo.setAttributeNode(checked);
 			else
-				elt_ativo.setAttribute('value', '0');
+				elt_ativo.setAttribute('value', 0);
 			
 
 			elt_ativo.onclick = function () {
 				if(this.hasAttribute('checked')) {
 					this.removeAttribute('checked');
-					this.setAttribute('value', '0');
+					this.setAttribute('value', 0);
 				} else {
 					this.setAttributeNode(checked);
-					this.setAttribute('value', '1');
+					this.setAttribute('value', 1);
 				}
 			}
 		}

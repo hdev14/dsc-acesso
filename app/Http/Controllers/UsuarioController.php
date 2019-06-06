@@ -31,7 +31,10 @@ class UsuarioController extends Controller
             'usuarios.tipo_acesso' => 'max:3|required'
             //'usuarios.ativo' => 'required'
         ]);
+
         $usuario = new Usuario($req->usuarios);
+        $usuario->ativo = isset($req->usuarios['ativo']) ?? 0;
+                
         //Criptografia da senha
         $usuario->senha = Hash::make($usuario->senha);
         $usuario->save();
@@ -50,12 +53,14 @@ class UsuarioController extends Controller
             $dados = $req->usuarios;
 
     		$usuario = Usuario::find($dados['id']);
+
     		$update = $usuario->update([
     			'login' => $dados['login'],
     			'senha' => $dados['senha'],
     			'nome' => $dados['nome'],
     			'cpf' => $dados['cpf'],
-    			'tipo_acesso' => $dados['tipo_acesso']
+    			'tipo_acesso' => $dados['tipo_acesso'],
+                'ativo' => isset($dados['ativo']) ?? 0
     		]);
 
     		if ($update) {

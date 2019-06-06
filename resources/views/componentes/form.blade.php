@@ -9,7 +9,7 @@
 
 	<div class="form-group">
 	    <label for="login">Login</label>
-	    <input type="text" class="form-control" id="login" placeholder="{{ $login ?? 'Digite um apelido para o seu login' }}" name="usuarios[login]">
+	    <input type="text" class="form-control" id="login" placeholder="{{ $login ?? 'Digite um apelido para o seu login' }}" name="usuarios[login]" value="{{ $login ?? '' }}">
 	</div>
 	<div class="form-group">
 	    <label for="senha">Senha</label>
@@ -21,11 +21,11 @@
 	</div>
 	<div class="form-group">
 	    <label for="nome">Nome</label>
-	    <input type="text" class="form-control" id="nome" placeholder="{{ $nome ?? 'Digite seu nome e sobrenome.' }}" name="usuarios[nome]">
+	    <input type="text" class="form-control" id="nome" placeholder="{{ $nome ?? 'Digite seu nome e sobrenome.' }}" name="usuarios[nome]" value="{{ $nome ?? '' }}">
 	</div>
 	<div class="form-group">
 	    <label for="cpf">CPF</label>
-	    <input type="text" class="form-control" id="cpf" placeholder="{{ $cpf ?? 'Apenas números' }}" name="usuarios[cpf]">
+	    <input type="text" class="form-control" id="cpf" placeholder="{{ $cpf ?? 'Apenas números' }}" name="usuarios[cpf]" value="{{ $cpf ?? '' }}">
 	</div>
 	<div class="form-group">
 	    <label for="tipo-acesso">Tipo de Acesso</label>
@@ -37,7 +37,7 @@
 	</div>
 	<div class="form-group form-check">
 		<!-- Criar lógica com javascript para mudar o valor para false, caso seja desmarcado a opção. -->
-	  	<input class="form-check-input" type="checkbox" name="usuarios[ativo]" value="{{ $ativo ?? '' }}" id="ativo">
+	  	<input class="form-check-input" type="checkbox" name="usuarios[ativo]" value="{{ $ativo ?? 0 }}" id="ativo">
 	  	<label class="form-check-label" for="ativo">Ativo</label>
 	</div>
 	<button type="submit" class="btn btn-primary">Confirmar</button>

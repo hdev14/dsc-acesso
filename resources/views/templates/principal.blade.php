@@ -25,12 +25,20 @@
 		var elt_ativo = document.querySelector('#ativo');
 
 		if (elt_ativo) {
+			var attr_value = elt_ativo.getAttribute('value');
+			var checked = document.createAttribute('checked');
+
+			if(attr_value.textContent == '1')
+				elt_ativo.this.setAttributeNode(checked);
+			else
+				elt_ativo.setAttribute('value', '0');
+			
+
 			elt_ativo.onclick = function () {
 				if(this.hasAttribute('checked')) {
 					this.removeAttribute('checked');
 					this.setAttribute('value', '0');
 				} else {
-					var checked = document.createAttribute('checked');
 					this.setAttributeNode(checked);
 					this.setAttribute('value', '1');
 				}

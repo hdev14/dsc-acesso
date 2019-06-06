@@ -28,8 +28,8 @@ class UsuarioController extends Controller
             'usuarios.senha' => 'max:60|same:confirmSenha|required',
             'usuarios.nome' => 'max:200|required',
             'usuarios.cpf' => 'max:11|string|required',
-            'usuarios.tipo_acesso' => 'max:3|required',
-            'usuarios.ativo' => 'required'
+            'usuarios.tipo_acesso' => 'max:3|required'
+            //'usuarios.ativo' => 'required'
         ]);
         $usuario = new Usuario($req->usuarios);
         //Criptografia da senha

@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Route::post('/livros/criar', 'LivroController@criar');
+
+Route::put('/logs/criar', 'LogController@criar');

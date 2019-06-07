@@ -16,11 +16,10 @@
 			<td>{{ $usuario->tipo_acesso }}</td>
 			<td colspan="2">
 				<a class="btn btn-primary btn-sm" role="button" href="">Editar</a>
-				<a class="btn btn-danger btn-sm" role="button" href="">Excluir</a>
 				@if ($usuario->ativo == 1)
-					<a class="btn btn-primary btn-sm" role="button" href='{{ url("/usuarios/ativo/$usuario->id") }}'>Desativar</a>
+					<a class="btn btn-secondary btn-sm" role="button" href='{{ url("/usuarios/ativo/$usuario->id") }}'>Desativar</a>
 				@else
-					<a class="btn btn-danger btn-sm" role="button" href='{{ url("/usuarios/ativo/$usuario->id") }}'>Ativar</a>
+					<a class="btn btn-success btn-sm" role="button" href='{{ url("/usuarios/ativo/$usuario->id") }}'>Ativar</a>
 				@endif
 			</td>
 		</tr>

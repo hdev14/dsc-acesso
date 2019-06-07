@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::post('/livros/criar', 'LivroController@criar');
 
 Route::put('/logs/criar', 'LogController@criar');
+
+Route::post('/usuarios/autenticar', 'UsuarioController@autenticar');

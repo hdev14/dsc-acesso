@@ -12,6 +12,10 @@ class LogController extends Controller
         $log = new Log($req->json()->all());
         //Pegar id de usuario
         $log->save();
-        return response()->json(['msg' => 'Log adicionado com sucesso'], 200);
+        if($log){
+            return response()->json(['message' => 'Log adicionado com sucesso.'], 200);
+        }else{
+            return response()->json(['message' => 'Sintaxe incorreta da requisição.'], 400);
+        }
     }
 }

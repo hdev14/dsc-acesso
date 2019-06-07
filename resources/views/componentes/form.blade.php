@@ -35,10 +35,5 @@
 	      	<option value="010">010</option>
 		</select>
 	</div>
-	<div class="form-group form-check">
-		<!-- Criar lógica com javascript para mudar o valor para false, caso seja desmarcado a opção. -->
-	  	<input class="form-check-input" type="checkbox" name="usuarios[ativo]" value="{{ $ativo ?? 0 }}" id="ativo">
-	  	<label class="form-check-label" for="ativo">Ativo</label>
-	</div>
 	<button type="submit" class="btn btn-primary">Confirmar</button>
 </form>

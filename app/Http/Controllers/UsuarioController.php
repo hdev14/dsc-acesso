@@ -27,13 +27,12 @@ class UsuarioController extends Controller
             'usuarios.login' => 'max:50|required|unique:usuarios,login',
             'usuarios.senha' => 'max:60|same:confirmSenha|required',
             'usuarios.nome' => 'max:200|required',
-            'usuarios.cpf' => 'max:11|string|required',
-            'usuarios.tipo_acesso' => 'max:3|required'
-            //'usuarios.ativo' => 'required'
+            'usuarios.cpf' => 'min:11|max:11|string|required|unique:usuarios,cpf',
+            'usuarios.tipo_acesso' => 'min:3|max:3|required'
         ]);
 
         $usuario = new Usuario($req->usuarios);
-        $usuario->ativo = isset($req->usuarios['ativo']) ?? 0;
+        $usuario->ativo = 1;
                 
         //Criptografia da senha
         $usuario->senha = Hash::make($usuario->senha);
@@ -60,7 +59,6 @@ class UsuarioController extends Controller
     			'nome' => $dados['nome'],
     			'cpf' => $dados['cpf'],
     			'tipo_acesso' => $dados['tipo_acesso'],
-                'ativo' => isset($dados['ativo']) ?? 0
     		]);
 
     		if ($update) {
@@ -80,13 +78,22 @@ class UsuarioController extends Controller
     	]);
     }
 
+    public function ativo($id) {
+        $usuario = Usuario::find($id);
+        if($usuario != null) {
+            $ativo = $usuario->ativo;
+            $usuario->ativo = ($ativo == 1) ? 0 : 1;
+            $usuario->save();
+        }
+        return redirect('/index');
+    }
+
     public function excluir($id) {
         $usuario = Usuario::find($id);
         if($usuario != null) {
-            $usuario->delete();
+            $usuario->ativo = 0;
         }
         
         return redirect('/index');
-
     }
 }

@@ -93,12 +93,28 @@ class UsuarioController extends Controller
         return redirect('/index');
     }
 
-    public function excluir($id) {
+    /*public function excluir($id) {
         $usuario = Usuario::find($id);
         if($usuario != null) {
             $usuario->ativo = 0;
         }
         
         return redirect('/index');
+    }*/
+    
+    public function getId($id){
+        $usuario = Usuario::find($id);
+        if($usuario != null) {
+           return response()->json([
+            'id' => $usuario->id,
+            'nome' => $usuario->nome,
+            'cpf' => $usuario->cpf,
+            'ativo'=> $usuario->ativo,
+            'tipo_acesso'=> $usuario->tipo_acesso,
+           ], 200);
+        }
+        else {
+            return response()->json(['message' => 'erro'], 400);
+       }
     }
 }

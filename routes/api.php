@@ -17,8 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::post('/livros/criar', 'LivroController@criar');
+Route::put('/logs/criar/', 'LogController@criar');
 
-Route::put('/logs/criar', 'LogController@criar');
+Route::post('/usuarios/autenticar/', 'UsuarioController@autenticar');
 
-Route::post('/usuarios/autenticar', 'UsuarioController@autenticar');
+Route::get('/usuarios/get/{id}/', 'UsuarioController@getId');
+
+//Route::get('/usuarios/verificar/{token}/', 'UsuarioController@verificaToken');

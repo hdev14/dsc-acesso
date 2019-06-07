@@ -1,4 +1,4 @@
 
-<div class="alert alert-{{ $type }}" role="alert">
-  {{ $mensagem }}
+<div class="alert alert-{{ $message_type }}" role="alert">
+  {{ $message }}
 </div>

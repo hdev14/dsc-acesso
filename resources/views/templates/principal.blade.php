@@ -13,6 +13,20 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<!-- Mensagem de Alerta -->
+				@if (session->has('message-type') && session->has('message'))
+					@component('componentes.alert')
+						@slot('message_type') 
+							{{ session('message-type') }} 
+						@end
+						@slot('message')
+							{{ session('message') }}
+						@end
+					@endcomponent
+				@endif
+			</div>
+			<div class="col">
+				<!-- Conteúdo -->
 				@section('conteudo')
 				@show
 			</div>

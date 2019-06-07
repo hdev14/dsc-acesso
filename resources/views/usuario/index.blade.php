@@ -7,7 +7,6 @@
 			<th scope="col">Nome</th>
 			<th scope="col">CPF</th>
 			<th scope="col">Tipo de Acesso</th>
-			<th scope="col">Ativo</th>
 			<th scope="col" colspan="2">Opções</th>
 		</tr>
 		@foreach($usuarios as $usuario)
@@ -18,6 +17,11 @@
 			<td colspan="2">
 				<a class="btn btn-primary btn-sm" role="button" href="">Editar</a>
 				<a class="btn btn-danger btn-sm" role="button" href="">Excluir</a>
+				@if ($usuario->ativo == 1)
+					<a class="btn btn-primary btn-sm" role="button" href='{{ url("/usuarios/ativo/$usuario->id") }}'>Desativar</a>
+				@else
+					<a class="btn btn-danger btn-sm" role="button" href='{{ url("/usuarios/ativo/$usuario->id") }}'>Ativar</a>
+				@endif
 			</td>
 		</tr>
 		@endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuario;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UsuarioRequest;
 
 
 class UsuarioController extends Controller
@@ -21,15 +22,17 @@ class UsuarioController extends Controller
 
     public function autenticar(Request $req) {}
 
-    public function criar(Request $req) {
+    public function criar(UsuarioRequest $req) {
         //Validação básica, pode ser melhorada depois se precisar
-        $req->validate([
+        /*$req->validate([
             'usuarios.login' => 'max:50|required|unique:usuarios,login',
             'usuarios.senha' => 'max:60|same:confirmSenha|required',
             'usuarios.nome' => 'max:200|required',
             'usuarios.cpf' => 'min:11|max:11|string|required|unique:usuarios,cpf',
             'usuarios.tipo_acesso' => 'min:3|max:3|required'
-        ]);
+        ]);*/
+        // Validação com o UsuarioRequest.
+        $req->validated();
 
         $usuario = new Usuario($req->usuarios);
         $usuario->ativo = 1;
@@ -48,21 +51,23 @@ class UsuarioController extends Controller
 
     public function editar(Request $req, $id = null){
     	
-    	if(is_null($id)) {
-            $dados = $req->usuarios;
+        if(is_null($id)) {
+            // Validação personalizada para ação Editar.
+            $dados_validados = $req->validate([
+                'usuarios.login' => 'max:50|required',
+                'usuarios.senha' => 'max:60|same:confirmSenha|required',
+                'usuarios.nome' => 'max:200|required',
+                'usuarios.cpf' => 'min:11|max:11|string|required',
+                'usuarios.tipo_acesso' => 'min:3|max:3|required'
+            ]);
 
-    		$usuario = Usuario::find($dados['id']);
+    		$usuario = Usuario::find($req->usuarios['id']);
 
-    		$update = $usuario->update([
-    			'login' => $dados['login'],
-    			'senha' => $dados['senha'],
-    			'nome' => $dados['nome'],
-    			'cpf' => $dados['cpf'],
-    			'tipo_acesso' => $dados['tipo_acesso'],
-    		]);
+            // Faz o update com o array dos dados validados.
+    		$update = $usuario->update($dados_validados['usuarios']);
 
     		if ($update) {
-                $req->session()->flash('message-type','alert-success');
+                $req->session()->flash('message-type','success');
                 $req->session()->flash('message','Usuário modificado com sucesso!');
     		} else {
                 $req->session()->flash('message-type','alert-danger');

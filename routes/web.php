@@ -20,7 +20,7 @@ Route::view('/cadastro', 'usuario.cadastro');
 
 Route::post('/usuarios/autenticar', 'UsuarioController@autenticar');
 Route::post('/usuarios/criar', 'UsuarioController@criar');
-Route::match(['get','post'], '/usuarios/editar/{id?}', 'UsuarioController@editar');
+Route::match(['post', 'get'],'/usuarios/editar/{id?}', 'UsuarioController@editar');
 Route::get('/usuarios/ativo/{id}', 'UsuarioController@ativo')->name("usuarios.ativo");
 Route::post('/usuarios/excluir', 'UsuarioController@excluir');
 

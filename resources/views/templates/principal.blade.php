@@ -12,9 +12,9 @@
 	<br>
 	<div class="container">
 		<div class="row">
-			<div class="col">
+			<div class="col-12">
 				<!-- Mensagem de Alerta -->
-				@if (session->has('message-type') && session->has('message'))
+				@if ( session()->has('message-type') && session()->has('message') )
 					@component('componentes.alert')
 						@slot('message_type') 
 							{{ session('message-type') }} 
@@ -25,7 +25,7 @@
 					@endcomponent
 				@endif
 			</div>
-			<div class="col">
+			<div class="col-12">
 				<!-- Conteúdo -->
 				@section('conteudo')
 				@show

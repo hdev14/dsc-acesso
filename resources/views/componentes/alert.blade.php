@@ -1,4 +1,4 @@
 
-<div class="alert alert-{{ $message_type }}" role="alert">
-  {{ $message }}
+<div class="alert {{ 'alert-'. $message_type ?? 'success' }}" role="alert">
+  {{ $message ?? '' }}
 </div>

@@ -32,9 +32,9 @@ class UsuarioController extends Controller
             'usuarios.tipo_acesso' => 'min:3|max:3|required'
         ]);*/
         // Validação com o UsuarioRequest.
-        $req->validated();
+        $dados_usuario = $req->validated();
 
-        $usuario = new Usuario($req->usuarios);
+        $usuario = new Usuario($dados_usuario);
         $usuario->ativo = 1;
                 
         //Criptografia da senha
@@ -93,15 +93,6 @@ class UsuarioController extends Controller
         return redirect('/index');
     }
 
-    /*public function excluir($id) {
-        $usuario = Usuario::find($id);
-        if($usuario != null) {
-            $usuario->ativo = 0;
-        }
-        
-        return redirect('/index');
-    }*/
-    
     public function getId($id){
         $usuario = Usuario::find($id);
         if($usuario != null) {

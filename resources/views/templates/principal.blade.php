@@ -18,10 +18,10 @@
 					@component('componentes.alert')
 						@slot('message_type') 
 							{{ session('message-type') }} 
-						@end
+						@endslot
 						@slot('message')
 							{{ session('message') }}
-						@end
+						@endslot
 					@endcomponent
 				@endif
 			</div>

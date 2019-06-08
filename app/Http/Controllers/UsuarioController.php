@@ -26,8 +26,8 @@ class UsuarioController extends Controller
         
         $dados = $req->json()->all();
 
-        if(!array_key_exists('login', $dados) 
-            && !array_key_exists('senha', $dados))
+        if(!(array_key_exists('login', $dados) 
+            && array_key_exists('senha', $dados)))
             return response()->json(['message' => 'erro'], 400);
 
         if (!Auth::attempt([ "login" => $dados['login'], 
@@ -37,12 +37,14 @@ class UsuarioController extends Controller
         $id = Auth::id();
 
         $usuario_autenticado = Usuario::find($id);
+
+        $token = Str::random(60);
         $usuario_autenticado->forceFill([
-            'api_token' => hash('sha256', $token),
+            'token' => hash('sha256', $token),
         ])->save();
 
         return response()->json([
-            'token' => $usuario_autenticado->token,
+            'token' => $token,
             'usuario' => [
                 'id' => $usuario_autenticado->id,
                 'nome' => $usuario_autenticado->nome,

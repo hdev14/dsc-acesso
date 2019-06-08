@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', 'UsuarioController@index');
-Route::view('/cadastro', 'usuario.cadastro');
+Route::get('/index', 'UsuarioController@index')->name('index');
+Route::view('/cadastro', 'usuario.cadastro')->name('cadastro');
 
 Route::post('/usuarios/autenticar', 'UsuarioController@autenticar');
 Route::post('/usuarios/criar', 'UsuarioController@criar');

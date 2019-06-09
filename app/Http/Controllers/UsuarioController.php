@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioRequest;
 use Illuminate\Support\Facades\Hash;
@@ -21,36 +22,33 @@ class UsuarioController extends Controller
     }
 
     public function autenticar(Request $req) {
-        // AÇÃO AINDA NÃO TESTADA !!!
         
         $dados = $req->json()->all();
 
         if(!(array_key_exists('login', $dados) 
             && array_key_exists('senha', $dados)))
             return response()->json(['message' => 'erro'], 400);
-
-        if (!Auth::attempt([ "login" => $dados['login'], 
-                "senha" => $dados['senha'], 'ativo' => 1 ]))
+       
+        if (!Auth::attempt(['login' => $dados['login'], 
+            'password' => $dados['senha'], 'ativo' => 1]))
             return response()->json(['message' => 'erro'], 401);
 
-        $id = Auth::id();
-
-        $usuario_autenticado = Usuario::find($id);
-
         $token = Str::random(60);
-        $usuario_autenticado->forceFill([
+        Auth::user()->forceFill([
             'token' => hash('sha256', $token),
         ])->save();
+
+        $usuario = Auth::user();
 
         return response()->json([
             'token' => $token,
             'usuario' => [
-                'id' => $usuario_autenticado->id,
-                'nome' => $usuario_autenticado->nome,
-                'cpf' => $usuario_autenticado->cpf,
-                'tipo_acesso' => $usuario_autenticado->tipo_acesso,
+                'id' => $usuario->id,
+                'nome' => $usuario->nome,
+                'cpf' => $usuario->cpf,
+                'tipo_acesso' => $usuario->tipo_acesso,
             ]
-        ], 200); 
+        ], 200);
     }
 
     public function criar(UsuarioRequest $req) {

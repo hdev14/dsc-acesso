@@ -23,23 +23,41 @@ class UsuarioController extends Controller
 
     public function autenticar(Request $req) {
         
+        // Passa o JSON recebido.
         $dados = $req->json()->all();
 
+        // Verifica se existe as chaves 'login' e 'senha' no Array.
         if(!(array_key_exists('login', $dados) 
             && array_key_exists('senha', $dados)))
             return response()->json(['message' => 'erro'], 400);
        
+        // Função para a autenticação do usuário. Se o usuário estiver autenticado continua.
         if (!Auth::attempt(['login' => $dados['login'], 
             'password' => $dados['senha'], 'ativo' => 1]))
             return response()->json(['message' => 'erro'], 401);
 
+        // Cria o token.
         $token = Str::random(60);
+        // Tranforma o token em hash e salva no banco.
         Auth::user()->forceFill([
             'token' => hash('sha256', $token),
         ])->save();
 
+        // Retorna o usuário autenticado.
         $usuario = Auth::user();
 
+        /* Envia os dados de acordo com a documentação.
+        {
+            "token": "token",
+            "usuario": {
+                "id": "1",
+                "nome": "joao",
+                "cpf": "11111111111"
+                "tipo_acesso": "000"
+            }
+        } 
+        */
+        
         return response()->json([
             'token' => $token,
             'usuario' => [

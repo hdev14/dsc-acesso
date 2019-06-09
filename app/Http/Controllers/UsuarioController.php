@@ -167,14 +167,17 @@ class UsuarioController extends Controller
 
     public function verificar($token = null){
 
+        // Verifica se é nulo o token.
         if (is_null($token)) {
             return response()->json([
                 'message' => 'erro'
             ], 400);
         }
 
+        // Se não for, procura o usuário com esse token.
         $usuario = Usuario::where('token', $token)->first();
 
+        // Verifica se o usuário é nulo.
         if (is_null($usuario)){
              return response()->json([
                 'is_valido' => false,
@@ -182,7 +185,7 @@ class UsuarioController extends Controller
             ], 200);
         }
            
-
+        // Caso não for, retorna o JSON com as informações da documentação.
         return response()->json([
             'is_valido' => true,
             'usuario' => [

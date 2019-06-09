@@ -14,6 +14,7 @@ class UsuarioController extends Controller
 {
 
     public function index() {
+        
     	$usuarios = Usuario::orderby('nome')->get();
 
     	return view('usuario.index', [
@@ -23,7 +24,7 @@ class UsuarioController extends Controller
 
     public function autenticar(Request $req) {
         
-        // Passa o JSON recebido.
+        // Dados recebidos(JSON).
         $dados = $req->json()->all();
 
         // Verifica se existe as chaves 'login' e 'senha' no Array.
@@ -31,14 +32,16 @@ class UsuarioController extends Controller
             && array_key_exists('senha', $dados)))
             return response()->json(['message' => 'erro'], 400);
        
-        // Função para a autenticação do usuário. Se o usuário estiver autenticado continua.
+        // Verificar se o usuário está autenticado.
+        // Função para a autenticação do usuário.
         if (!Auth::attempt(['login' => $dados['login'], 
             'password' => $dados['senha'], 'ativo' => 1]))
             return response()->json(['message' => 'erro'], 401);
 
         // Cria o token.
         $token = Str::random(60);
-        // Modifica o token no banco.
+
+        // Modifica o token no banco e salva.
         Auth::user()->forceFill([
             'token' => $token,
         ])->save();
@@ -46,18 +49,7 @@ class UsuarioController extends Controller
         // Retorna o usuário autenticado.
         $usuario = Auth::user();
 
-        /* Envia os dados de acordo com a documentação.
-        {
-            "token": "token",
-            "usuario": {
-                "id": "1",
-                "nome": "joao",
-                "cpf": "11111111111"
-                "tipo_acesso": "000"
-            }
-        } 
-        */
-        
+        // Envia os dados de acordo com a documentação.
         return response()->json([
             'token' => $token,
             'usuario' => [
@@ -70,14 +62,7 @@ class UsuarioController extends Controller
     }
 
     public function criar(UsuarioRequest $req) {
-        //Validação básica, pode ser melhorada depois se precisar
-        /*$req->validate([
-            'usuarios.login' => 'max:50|required|unique:usuarios,login',
-            'usuarios.senha' => 'max:60|same:confirmSenha|required',
-            'usuarios.nome' => 'max:200|required',
-            'usuarios.cpf' => 'min:11|max:11|string|required|unique:usuarios,cpf',
-            'usuarios.tipo_acesso' => 'min:3|max:3|required'
-        ]);*/
+
         // Validação com o UsuarioRequest.
         $req->validated();
 
@@ -131,12 +116,15 @@ class UsuarioController extends Controller
     }
 
     public function ativo($id) {
+
         $usuario = Usuario::find($id);
+
         if ($usuario != null) {
             $ativo = $usuario->ativo;
             $usuario->ativo = ($ativo == 1) ? 0 : 1;
             $usuario->save();
         }
+
         return redirect('/index');
     }
 
@@ -150,7 +138,9 @@ class UsuarioController extends Controller
     }*/
     
     public function getId($id){
+
         $usuario = Usuario::find($id);
+
         if ($usuario != null) {
            return response()->json([
             'id' => $usuario->id,
@@ -162,7 +152,7 @@ class UsuarioController extends Controller
         }
         else {
             return response()->json(['message' => 'erro'], 400);
-       }
+        }
     }
 
     public function verificar($token = null){

@@ -38,7 +38,7 @@ class UsuarioController extends Controller
 
         // Cria o token.
         $token = Str::random(60);
-        // Tranforma o token em hash e salva no banco.
+        // Modifica o token no banco.
         Auth::user()->forceFill([
             'token' => hash('sha256', $token),
         ])->save();

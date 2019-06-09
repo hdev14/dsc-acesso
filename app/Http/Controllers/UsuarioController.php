@@ -14,7 +14,7 @@ class UsuarioController extends Controller
 {
 
     public function index() {
-        
+
     	$usuarios = Usuario::orderby('nome')->get();
 
     	return view('usuario.index', [
@@ -80,39 +80,39 @@ class UsuarioController extends Controller
         return redirect('/index');
     }
 
-
+    // Ação para os verbos GET e POST
     public function editar(Request $req, $id = null){
     	
-        if (is_null($id)) {
-            // Validação personalizada para ação Editar.
-            $dados_validados = $req->validate([
-                'usuarios.login' => 'max:50|required',
-                'usuarios.senha' => 'max:60|same:confirmSenha|required',
-                'usuarios.nome' => 'max:200|required',
-                'usuarios.cpf' => 'min:11|max:11|string|required',
-                'usuarios.tipo_acesso' => 'min:3|max:3|required'
+        // Se tiver o paramento $id retorna o formulário.
+        if (!is_null($id)) {
+            return view('usuario.editar',[
+                'usuario' => Usuario::find($id),
             ]);
+        }
 
-    		$usuario = Usuario::find($req->usuarios['id']);
+        // Validação personalizada para ação Editar.
+        $dados_validados = $req->validate([
+            'usuarios.login' => 'max:50|required',
+            'usuarios.senha' => 'max:60|same:confirmSenha|required',
+            'usuarios.nome' => 'max:200|required',
+            'usuarios.cpf' => 'min:11|max:11|string|required',
+            'usuarios.tipo_acesso' => 'min:3|max:3|required'
+        ]);
 
-            // Faz o update com o array dos dados validados.
-    		$update = $usuario->update($dados_validados['usuarios']);
+		$usuario = Usuario::find($req->usuarios['id']);
 
-    		if ($update) {
-                $req->session()->flash('message-type','success');
-                $req->session()->flash('message','Usuário modificado com sucesso!');
-    		} else {
-                $req->session()->flash('message-type','danger');
-                $req->session()->flash('message','Não foi possível modificar o usuário. Por favor, tente novamente !');
-            }
+        // Faz o update com o array dos dados validados.
+		$update = $usuario->update($dados_validados['usuarios']);
 
-    		return redirect('/index');
-    	}
+		if ($update) {
+            $req->session()->flash('message-type','success');
+            $req->session()->flash('message','Usuário modificado com sucesso!');
+		} else {
+            $req->session()->flash('message-type','danger');
+            $req->session()->flash('message','Não foi possível modificar o usuário. Por favor, tente novamente !');
+        }
 
-    	// Se tiver o paramento $id retorna o formulário.
-    	return view('usuario.editar',[
-    		'usuario' => Usuario::find($id),
-    	]);
+		return redirect('/index');
     }
 
     public function ativo($id) {

@@ -27,7 +27,7 @@ class UsuarioController extends Controller
         $dados = $req->json()->all();
 
         // Verifica se existe as chaves 'login' e 'senha' no Array.
-        if(!(array_key_exists('login', $dados) 
+        if (!(array_key_exists('login', $dados) 
             && array_key_exists('senha', $dados)))
             return response()->json(['message' => 'erro'], 400);
        
@@ -40,7 +40,7 @@ class UsuarioController extends Controller
         $token = Str::random(60);
         // Modifica o token no banco.
         Auth::user()->forceFill([
-            'token' => hash('sha256', $token),
+            'token' => $token,
         ])->save();
 
         // Retorna o usuário autenticado.
@@ -98,7 +98,7 @@ class UsuarioController extends Controller
 
     public function editar(Request $req, $id = null){
     	
-        if(is_null($id)) {
+        if (is_null($id)) {
             // Validação personalizada para ação Editar.
             $dados_validados = $req->validate([
                 'usuarios.login' => 'max:50|required',
@@ -132,7 +132,7 @@ class UsuarioController extends Controller
 
     public function ativo($id) {
         $usuario = Usuario::find($id);
-        if($usuario != null) {
+        if ($usuario != null) {
             $ativo = $usuario->ativo;
             $usuario->ativo = ($ativo == 1) ? 0 : 1;
             $usuario->save();
@@ -151,7 +151,7 @@ class UsuarioController extends Controller
     
     public function getId($id){
         $usuario = Usuario::find($id);
-        if($usuario != null) {
+        if ($usuario != null) {
            return response()->json([
             'id' => $usuario->id,
             'nome' => $usuario->nome,
@@ -163,5 +163,34 @@ class UsuarioController extends Controller
         else {
             return response()->json(['message' => 'erro'], 400);
        }
+    }
+
+    public function verificar($token = null){
+
+        if (is_null($token)) {
+            return response()->json([
+                'message' => 'erro'
+            ], 400);
+        }
+
+        $usuario = Usuario::where('token', $token)->first();
+
+        if (is_null($usuario)){
+             return response()->json([
+                'is_valido' => false,
+                'usuario' => null
+            ], 200);
+        }
+           
+
+        return response()->json([
+            'is_valido' => true,
+            'usuario' => [
+                'id' => $usuario->id,
+                'nome' => $usuario->nome,
+                'cpf' => $usuario->cpf,
+                'tipo_acesso' => $usuario->tipo_acesso,
+            ]
+        ], 200);
     }
 }

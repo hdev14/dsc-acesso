@@ -23,4 +23,4 @@ Route::post('/usuarios/autenticar/', 'UsuarioController@autenticar');
 
 Route::get('/usuarios/get/{id}/', 'UsuarioController@getId');
 
-//Route::get('/usuarios/verificar/{token}/', 'UsuarioController@verificaToken');
+Route::get('/usuarios/verificar/{token?}/', 'UsuarioController@verificar');

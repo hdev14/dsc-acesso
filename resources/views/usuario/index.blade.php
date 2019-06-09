@@ -7,15 +7,15 @@
 	</h1>
 	<br>
 	<table class="table table-hover">
-		<thead class="thead-dark">
+		<thead class="thead-dark text-center">
 			<tr>
 				<th scope="col">Nome</th>
 				<th scope="col">CPF</th>
 				<th scope="col">Tipo de Acesso</th>
-				<th scope="col" colspan="3">Opções</th>
+				<th scope="col" colspan="2">Opções</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="text-center">
 			@foreach($usuarios as $usuario)
 			<tr scope="row" class="{{ $usuario->ativo == 1 ? '' : 'table-secondary'  }}">
 				<td>{{ $usuario->nome }}</td>

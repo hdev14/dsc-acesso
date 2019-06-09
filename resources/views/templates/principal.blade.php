@@ -18,8 +18,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ route('index') }}">Home</a>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ route('index') }}">Usuários</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('cadastro') }}">Cadastrar</a>

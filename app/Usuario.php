@@ -25,7 +25,7 @@ class Usuario extends Model implements AuthenticatableContract
     }
 
     public function getAuthPassword(){
-        return Hash::make($this->senha);;
+        return $this->senha;
     }
 
     public function getAuthIdentifier(){

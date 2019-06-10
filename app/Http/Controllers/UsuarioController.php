@@ -174,7 +174,11 @@ class UsuarioController extends Controller
                 'usuario' => null
             ], 200);
         }
-           
+
+        // Adiciona a data e hora do último acesso.
+        $usuario->last_access = date("Y-m-d H:i:s");
+        $usuario->save();
+
         // Se não for, retorna o JSON com as informações da documentação.
         return response()->json([
             'is_valido' => true,

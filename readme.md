@@ -1,13 +1,11 @@
 # Desenvolvedores
 
-## Hermerson Araújo
-	
-[Outros projetos](https://github.com/HermersonDev?tab=repositories)
+### _Hermerson Araújo_ [Outros projetos](https://github.com/HermersonDev?tab=repositories)
 
-## Lielson Duarte
+### _Lielson Duarte_
 	
 [Outros projetos](https://github.com/lielsonduarte?tab=repositories)
 
-## Magnos Lima
+### _Magnos Lima_
 	
 [Outros projetos](https://github.com/MagnosLima?tab=repositories)

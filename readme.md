@@ -2,7 +2,7 @@
 
 ## Hermerson Araújo
 	
-    [Outros projetos](https://github.com/HermersonDev?tab=repositories)
+    (Outros projetos)[https://github.com/HermersonDev?tab=repositories]
 
 ## Lielson Duarte
 	

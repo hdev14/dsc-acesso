@@ -88,7 +88,7 @@ class UsuarioController extends Controller
         $req->session()->flash('message-type','success');
         $req->session()->flash('message','Usuário criado com sucesso!');
 
-        return redirect('/index');
+        return redirect('/usuarios/index');
     }
 
     // Ação para os verbos GET e POST
@@ -123,7 +123,7 @@ class UsuarioController extends Controller
             $req->session()->flash('message','Não foi possível modificar o usuário. Por favor, tente novamente !');
         }
 
-		return redirect('/index');
+		return redirect('/usuarios/index');
     }
 
     public function ativo($id) {
@@ -136,7 +136,7 @@ class UsuarioController extends Controller
             $usuario->save();
         }
 
-        return redirect('/index');
+        return redirect('/usuarios/index');
     }
 
     public function getId($id){

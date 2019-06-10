@@ -1,6 +1,10 @@
 <!-- PÁGINA INICIAL, MOSTRA OS USUÁRIOS. -->
 @extends('templates.principal')
 
+@section('title')
+	Usuários
+@endsection
+
 @section('conteudo')
 	<h1>
 		Usuários
@@ -20,7 +24,7 @@
 			<tr scope="row" class="{{ $usuario->ativo == 1 ? '' : 'table-secondary'  }}">
 				<td>{{ $usuario->nome }}</td>
 				<td>{{ $usuario->cpf }}</td>
-				<td>{{ $usuario->tipo_acesso }}</td>
+				<td>{{ $tipo_acesso[$usuario->tipo_acesso] }}</td>
 				<td>
 					<a class="btn btn-primary btn-sm" role="button" href="{{ url("/usuarios/editar/$usuario->id") }}">Editar</a>
 					@if ($usuario->ativo == 1)

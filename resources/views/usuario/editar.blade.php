@@ -1,6 +1,10 @@
 <!-- PÁGINA PARA EDITAR O USUÁRIO. -->
 @extends('templates.principal')
 
+@section('title')
+	Usuários Editar
+@endsection
+
 @section('conteudo')
 	@component('componentes.form')
 		@slot('action') UsuarioController@editar @endslot

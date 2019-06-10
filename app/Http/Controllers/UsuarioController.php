@@ -17,8 +17,19 @@ class UsuarioController extends Controller
 
     	$usuarios = Usuario::orderby('nome')->get();
 
+        $tipo_acesso = [
+            '100' => 'Compra',
+            '010' => 'Venda',
+            '001' => 'Produção',
+            '110' => 'Compra & Venda',
+            '101' => 'Compra & Produção',
+            '011' => 'Venda & Produção',
+            '111' => 'Acesso Total',
+        ];
+
     	return view('usuario.index', [
     		'usuarios' => $usuarios,
+            'tipo_acesso' => $tipo_acesso
     	]);
     }
 
@@ -66,7 +77,7 @@ class UsuarioController extends Controller
         // Validação com o UsuarioRequest.
         $dados_usuario = $req->validated();
 
-        $usuario = new Usuario($dados_usuario);
+        $usuario = new Usuario($dados_usuario['usuarios']);
         $usuario->ativo = 1;
                 
         //Criptografia da senha

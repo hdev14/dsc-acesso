@@ -22,23 +22,23 @@
 
 			<div class="form-group">
 			    <label for="login">Login</label>
-			    <input type="text" class="form-control" id="login" placeholder="{{ $login ?? 'Digite um apelido para o seu login' }}" name="usuarios[login]" value="{{ $login ?? '' }}">
+			    <input type="text" class="form-control" id="login" placeholder="{{ $login ?? 'Digite um apelido para o seu login' }}" name="usuarios[login]" value="{{ $login ?? '' }}" maxlength="50">
 			</div>
 			<div class="form-group">
 			    <label for="senha">Senha</label>
-			    <input type="password" class="form-control" id="senha" placeholder="Senha" name="usuarios[senha]">
+			    <input type="password" class="form-control" id="senha" placeholder="Senha" name="usuarios[senha]" maxlength="60">
 			</div>
 			<div class="form-group">
 			    <label for="confirma-senha">Confirma Senha</label>
-			    <input type="password" class="form-control" id="confirma-senha" placeholder="Por favor, digite sua senha novamente." name="confirmSenha">
+			    <input type="password" class="form-control" id="confirma-senha" placeholder="Por favor, digite sua senha novamente." name="confirmSenha" maxlength="60">
 			</div>
 			<div class="form-group">
 			    <label for="nome">Nome</label>
-			    <input type="text" class="form-control" id="nome" placeholder="{{ $nome ?? 'Digite seu nome e sobrenome.' }}" name="usuarios[nome]" value="{{ $nome ?? '' }}">
+			    <input type="text" class="form-control" id="nome" placeholder="{{ $nome ?? 'Digite seu nome e sobrenome.' }}" name="usuarios[nome]" value="{{ $nome ?? '' }}" maxlength="200">
 			</div>
 			<div class="form-group">
 			    <label for="cpf">CPF</label>
-			    <input type="text" class="form-control" id="cpf" placeholder="{{ $cpf ?? 'Apenas números' }}" name="usuarios[cpf]" value="{{ $cpf ?? '' }}">
+			    <input type="text" class="form-control" id="cpf" placeholder="{{ $cpf ?? 'Apenas números' }}" name="usuarios[cpf]" value="{{ $cpf ?? '' }}" maxlength="11">
 			</div>
 			<div class="form-group">
 			    <label for="tipo-acesso">Tipo de Acesso</label>
@@ -48,7 +48,7 @@
 			      	<option value="001">Produção</option>
 			      	<option value="110">Compra & Venda</option>
 			      	<option value="101">Compra & Produção</option>
-			      	<option value="011">Produção & Venda</option>
+			      	<option value="011">Venda & Produção</option>
 			      	<option value="111">Acesso Total</option>
 				</select>
 			</div>

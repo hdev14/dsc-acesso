@@ -15,12 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', 'UsuarioController@index')->name('index');
-Route::view('/cadastro', 'usuario.cadastro')->name('cadastro');
-
-Route::post('/usuarios/autenticar', 'UsuarioController@autenticar');
-Route::post('/usuarios/criar', 'UsuarioController@criar');
-Route::match(['post', 'get'],'/usuarios/editar/{id?}', 'UsuarioController@editar');
-Route::get('/usuarios/ativo/{id}', 'UsuarioController@ativo')->name("usuarios.ativo");
-Route::post('/usuarios/excluir', 'UsuarioController@excluir');
-
+Route::prefix('usuarios')->group(function () {
+	Route::get('index', 'UsuarioController@index')->name('index');
+	Route::view('cadastro', 'usuario.cadastro')->name('cadastro');
+	Route::post('autenticar', 'UsuarioController@autenticar');
+	Route::post('criar', 'UsuarioController@criar');
+	Route::match(['post', 'get'],'editar/{id?}', 'UsuarioController@editar');
+	Route::get('ativo/{id}', 'UsuarioController@ativo')->name("usuarios.ativo");
+	Route::post('excluir', 'UsuarioController@excluir');
+});

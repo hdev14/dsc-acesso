@@ -25,6 +25,6 @@ Route::prefix('usuarios')->group(function () {
 
     Route::get('get/{id}', 'UsuarioController@getId');
 
-    Route::get('verificar/{token?}/', 'UsuarioController@verificar');
+    Route::get('verificar/{token?}', 'UsuarioController@verificar');
  
 });

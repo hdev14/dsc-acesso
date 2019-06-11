@@ -19,8 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::put('/logs/criar/', 'LogController@criar');
 
-Route::post('/usuarios/autenticar/', 'UsuarioController@autenticar');
+Route::prefix('usuarios')->group(function () {
+    
+    Route::post('autenticar', 'UsuarioController@autenticar');
 
-Route::get('/usuarios/get/{id}/', 'UsuarioController@getId');
+    Route::get('get/{id}', 'UsuarioController@getId');
 
-Route::get('/usuarios/verificar/{token?}/', 'UsuarioController@verificar');
+    Route::get('verificar/{token?}/', 'UsuarioController@verificar');
+ 
+});

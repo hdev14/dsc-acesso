@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Log;
 
+// ------------ // Em construção, mas já funcionando // ------------ //
 class LogController extends Controller
 {
 	public function criar(Request $req) {
-		//Implementar validação
+		
         $log = new Log($req->json()->all());
-        //Pegar id de usuario
         //$token = token do header
-        //$usuario = Usuario::where('token', $token)->first();
+        $token = $req->header('token');
+        $usuario = Usuario::where('token', $token)->first();
+
+        /*if ($usuario == null)
+        {
+            return response()->json([
+                'message' => 'Algum erro.'
+            ], 4xx);
+        }*/
+
+        //Pegar id de usuario
+        $idUsuario = $usuario->id;
+        $log->usuario_id = $idUsuario;
                 
         if ($log->save())
         {

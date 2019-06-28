@@ -17,12 +17,12 @@ class LogController extends Controller
         $token = $req->header('token');
         $usuario = Usuario::where('token', $token)->first();
 
-        /*if ($usuario == null)
+        if ($usuario == null)
         {
             return response()->json([
-                'message' => 'Algum erro.'
-            ], 4xx);
-        }*/
+                'message' => 'Erro: usuário não encontrado.'
+            ], 404);
+        }
 
         //Pegar id de usuario
         $idUsuario = $usuario->id;

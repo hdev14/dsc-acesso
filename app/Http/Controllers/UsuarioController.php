@@ -104,7 +104,7 @@ class UsuarioController extends Controller
         // Validação personalizada para ação Editar.
         $dados_validados = $req->validate([
             'usuarios.login' => 'max:50|required',
-            'usuarios.senha' => 'max:60|same:confirmSenha|required',
+            'usuarios.senha' => 'max:60|same:confirmSenha',
             'usuarios.nome' => 'max:200|required',
             'usuarios.cpf' => 'min:11|max:11|string|required',
             'usuarios.tipo_acesso' => 'min:3|max:3|required'
@@ -112,8 +112,15 @@ class UsuarioController extends Controller
 
 		$usuario = Usuario::find($req->usuarios['id']);
 
+        $usuario_valido = $dados_validados['usuarios'];
+
+        if (!is_null($usuario_valido['senha']))
+            $usuario_valido['senha'] = Hash::make($usuario_valido['senha']);
+        else
+            $usuario_valido['senha'] = $usuario->senha;
+
         // Faz o update com o array dos dados validados.
-		$update = $usuario->update($dados_validados['usuarios']);
+		$update = $usuario->update($usuario_valido);
 
 		if ($update) {
             $req->session()->flash('message-type','success');
